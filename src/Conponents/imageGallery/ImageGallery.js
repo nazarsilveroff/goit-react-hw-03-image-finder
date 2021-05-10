@@ -2,11 +2,9 @@ import axios from "axios";
 import React, { Component } from "react";
 import Button from "../button/Button";
 import ImageGalleryList from "../imageGalleryItem/ImageGalleryList";
-
 import Loader from "../loader/Loader";
 import Modal from "../modal/Modal";
 import Searchbar from "../searchbar/Searchbar";
-import { Section } from "../section/Section";
 
 const API = `21146300-df17acb11e029d73c17341eff`;
 const URL = `https://pixabay.com/api/`;
@@ -52,10 +50,13 @@ class ImageGallery extends Component {
       this.setState((prevState) => ({
         loader: false,
       }));
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
+
+      if (this.state.page > 1) {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
@@ -67,7 +68,6 @@ class ImageGallery extends Component {
   showMore = () => {
     console.log("showMore");
     this.setState((prevSt) => ({ page: prevSt.page + 1 }));
-    
   };
 
   largeImgHendler = (e) => {
@@ -83,17 +83,17 @@ class ImageGallery extends Component {
     return (
       <>
         <Searchbar onSubmit={this.formSubmit} />
-        <Section>
-          {loader ? (
-            <Loader />
-          ) : (
-            <ImageGalleryList
-              images={images}
-              largeImgHendler={this.largeImgHendler}
-            />
-          )}
-          {images.length > 0 && <Button showMore={this.showMore} />}
-        </Section>
+
+        {loader ? (
+          <Loader />
+        ) : (
+          <ImageGalleryList
+            images={images}
+            largeImgHendler={this.largeImgHendler}
+          />
+        )}
+        {images.length > 0 && <Button showMore={this.showMore} />}
+
         <Modal
           open={shoModal}
           onClose={this.hendelTogalModal}
