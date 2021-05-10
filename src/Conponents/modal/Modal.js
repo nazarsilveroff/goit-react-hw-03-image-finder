@@ -11,6 +11,7 @@ class Modal extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    largeImg: PropTypes.string.isRequired
   };
   componentDidMount() {
     window.addEventListener("keydown", this.handleClose);

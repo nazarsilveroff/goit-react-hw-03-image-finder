@@ -98,7 +98,6 @@ class ImageGallery extends Component {
           open={shoModal}
           onClose={this.hendelTogalModal}
           largeImg={largeImg}
-          loader={loader}
         />
       </>
     );

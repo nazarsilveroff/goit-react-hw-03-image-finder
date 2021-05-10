@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 class Searchbar extends Component {
-  state = { imageQuery: '' };
+  state = { imageQuery: "" };
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired
+  };
+
   onHandlerSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state.imageQuery);
@@ -8,7 +13,6 @@ class Searchbar extends Component {
   onHandlerChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    
   };
   render() {
     return (
